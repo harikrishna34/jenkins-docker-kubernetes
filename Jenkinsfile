@@ -67,5 +67,13 @@ pipeline {
 			    echo "Deployment Finished ..."
 		    }
 	    }
+
+		stage('Manual Approval') {
+            steps {
+                timeout(time: 7, unit: 'DAYS') {
+                    input message: 'Deploy to K8s?', ok: 'Deploy'
+                }
+            }
+        }
     }
 }
